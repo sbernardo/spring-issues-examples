@@ -1,0 +1,30 @@
+= Spring Boot Example Issues Repository
+:author: Salvatore Bernardo
+
+This repository contains a collection of example projects that reproduce specific issues related to Spring Boot 3.2.x. Each directory represents a unique issue with Spring Boot 3.2.x. The issues span a variety of Spring's features and modules, from Bean lifecycle management, complex transactions, to REST controllers, among others.
+
+== Repository Structure
+
+Each subdirectory in this repository corresponds to an identifiable issue.
+Each directory contains an isolated, self-containing Spring Boot application and can be run independently.
+Inside each sub-directory, you will find the source code along with a separate README that details the specific issue, how to reproduce it, and potential ways to resolve or workarounds.
+
+== Running the Examples
+
+Every subdirectory is set up as a Maven project and can be run from the command line with mvn spring-boot:run or directly from an IDE with Spring Tools Suite (STS) installed.
+NOTE: Ensure you have JDK 21 and Maven 3.6+ installed to be able to run the examples.
+
+== Contributing
+
+If you have discovered a Spring Boot 3.2.x issue that is not covered in this repository and can be reproduced in a simple, isolated project, you are welcomed to submit a Pull Request.
+Make sure the introduced project contains a README.md file indicating the problem and the steps to reproduce it.
+
+== Disclaimer
+
+This repository is solely for educational purposes presenting known issues with Spring Boot 3.2.x. It is not endorsed or affiliated with the official Spring Boot project or its owner, Pivotal Software.
+
+NOTE: If you believe you have encountered a bug in Spring Boot 3.2.x, the best way to bring attention to it is through the Spring Boot project's official issue tracker.
+
+== License
+
+The projects in this repository are covered by the MIT License.
