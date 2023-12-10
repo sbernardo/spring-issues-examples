@@ -8,8 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-
-@Document(collection = "orders")
+@Document(collection = "order")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

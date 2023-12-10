@@ -22,33 +22,47 @@ public class OrderController {
 
     @PatchMapping("orders")
     public String myEndpoint() {
-        var supplier = new Supplier("suppId1", "Salvatore", "PART_NUM122");
-        var suppliers = List.of(supplier);
-        var firstOrderItem = new OrderItem("IDIT1", BigDecimal.ONE, "PART_NUM1", "Ordered from Amazon", 1, suppliers);
+        var supplierFirstOrderItem = new Supplier("suppId1", "Supplier1", "PART_NUM122");
+        var suppliersFirstOrderItem = List.of(supplierFirstOrderItem);
+        var firstOrderItem = new OrderItem("IDIT1", BigDecimal.ONE, "PART_NUM1", "Ordered from Amazon", 1, suppliersFirstOrderItem);
         var orderItems = new ArrayList<>(List.of(firstOrderItem));
         var order = new Order("ID1", orderItems);
         var orders = List.of(order);
 
-        //First upsert -> new order
+        //First upsert -> new order -> INSERT DONE
         var firstUpsert = service.upsertOrders(orders, orderItems);
         log.info("First upsert result: {}", firstUpsert);
 
-        //Second upsert -> add a new order item on an existing order
-        var newOrderItem = new OrderItem("IDIT2", BigDecimal.TEN, "PART_NUM2", "Ordered from Ebay", 100, suppliers);
+        //Second upsert -> add a new order item on an existing order -> UPDATE DONE
+        var supplierSecondOrderItem = new Supplier("suppId2", "Supplier2", "PART_NUM211");
+        var suppliersSecondOrderItem = List.of(supplierSecondOrderItem);
+        var newOrderItem = new OrderItem("IDIT2", BigDecimal.TEN, "PART_NUM2", "Ordered from Ebay", 100, suppliersSecondOrderItem);
         orderItems.add(newOrderItem);
         var secondUpsert = service.upsertOrders(orders, orderItems);
         log.info("Second upsert result: {}", secondUpsert);
 
-        //Third upsert -> modified price on existing order item
+        //Third upsert -> modified price on existing order item -> UPDATE DONE
         order.getOrderItemList().getFirst().setPrice(BigDecimal.valueOf(10000));
         var thirdUpsert = service.upsertOrders(orders, orderItems);
         log.info("Third upsert result: {}", thirdUpsert);
 
-        //Fourth upsert -> writing same order
+        //Fourth upsert -> writing same order -> NO UPDATE DONE
         var fourthUpsert = service.upsertOrders(orders, orderItems);
         log.info("Fourth upsert result: {}", fourthUpsert);
 
-        return fourthUpsert.toString();
+        var newOrderListOrdered = List.of(newOrderItem, firstOrderItem);
+        order.setOrderItemList(newOrderListOrdered);
+        //Fifth upsert -> writing same order (different orderItems internal list) -> UPDATE DONE
+        var fifthUpsert = service.upsertOrders(orders, orderItems);
+        log.info("Fifth upsert result: {}", fifthUpsert);
+
+        var newOrderListDeleteOne = List.of(newOrderItem);
+        order.setOrderItemList(newOrderListDeleteOne);
+        //Sixth upsert -> writing same order (orderItems deleted one) -> UPDATE DONE
+        var sixthUpsert = service.upsertOrders(orders, orderItems);
+        log.info("Sixth upsert result: {}", sixthUpsert);
+
+        return sixthUpsert.toString();
     }
 
 }

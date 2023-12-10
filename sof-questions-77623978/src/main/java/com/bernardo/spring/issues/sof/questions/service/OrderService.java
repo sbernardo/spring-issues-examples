@@ -47,7 +47,14 @@ public class OrderService {
         Update update = new Update();
         update.set("orderId", order.getOrderId());
         update.set("orderItemList", order.getOrderItemList());
-        // how to do for OrderItems
+        return update;
+    }
+
+
+    protected Update createOrderUpdateWithAddToSet(Order order) {
+        Update update = new Update();
+        update.set("orderId", order.getOrderId());
+        order.getOrderItemList().forEach(oi -> update.addToSet("orderItemList", oi));
         return update;
     }
 }
