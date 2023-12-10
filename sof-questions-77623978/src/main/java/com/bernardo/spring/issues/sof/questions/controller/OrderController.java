@@ -16,7 +16,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @RequiredArgsConstructor
-public class ControllerUser {
+public class OrderController {
 
     private final OrderService service;
 
