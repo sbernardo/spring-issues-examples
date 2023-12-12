@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: sof-questions-77646394
+
+gateway:
+  servers:
+    - local-server:
+      url: https://localhost:${server.port}
+      description: Api-Gateway-V2
+    - local-server:
+      url: https://localhost2:${server.port}
+      description: Api-Gateway-V3
+  v1Prefix: /api/v1
+
+#Old structure
+#gateway:
+#  servers:
+#    - local-server:
+#        url: https://localhost:${server.port}
+#        description: Api-Gateway-V2
+#  v1Prefix: /api/v1
