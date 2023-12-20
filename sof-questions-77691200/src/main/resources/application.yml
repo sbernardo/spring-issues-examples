@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: sof-questions-77691200
+
+gateway:
+  publicEndpoints:
+    - /api/v1/example
+    - /api/v1/another-example
