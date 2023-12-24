@@ -10,9 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>bernardo-spring-issues-sof-questions-77623978</artifactId>
-    <properties>
-        <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
-    </properties>
 
     <dependencies>
         <dependency>
